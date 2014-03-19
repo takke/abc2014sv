@@ -1,0 +1,31 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppTheme" parent="@style/MyAppTheme.Black" />
+
+    <style name="MyAppTheme.Light" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarSize">@dimen/actionBarSize</item>
+        <item name="android:actionBarStyle">@style/MyActionBarStyleLight</item>
+    </style>
+    
+    <style name="MyAppTheme.Black" parent="@android:style/Theme.Holo">
+        <item name="android:actionBarSize">@dimen/actionBarSize</item>
+        <item name="android:actionBarStyle">@style/MyActionBarStyleBlack</item>
+    </style>
+    
+    <style name="MyActionBarStyleLight" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:titleTextStyle">@style/MyActionBarTitleStyle</item>
+    </style>
+    
+    <style name="MyActionBarStyleBlack" parent="@android:style/Widget.Holo.ActionBar">
+        <item name="android:titleTextStyle">@style/MyActionBarTitleStyle</item>
+    </style>
+    
+    <style name="MyActionBarTitleStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textSize">14dip</item>
+	</style>
+	
+    <style name="MySelectDialogItem">
+        <item name="android:textColor">?android:attr/textColorAlertDialogListItem</item>
+    </style>
+    
+</resources>

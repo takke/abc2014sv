@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:orientation="vertical"
+	android:layout_height="fill_parent">
+	
+	<LinearLayout android:id="@+id/LinearLayout01"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+	    <ImageView
+	        android:id="@+id/ImageView01"
+	        android:background="@drawable/ic_launcher"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="@dimen/padding_medium"
+			/>
+		<TextView
+			android:id="@+id/app_name_text"
+			android:text="@string/main_message"
+		    android:layout_width="fill_parent"
+			android:textColor="#008000"
+			android:typeface="serif"
+			android:textSize="20dip"
+			android:layout_weight="1"
+			android:layout_height="fill_parent"
+			android:layout_gravity="center_vertical"
+			android:layout_marginLeft="@dimen/padding_small"
+			android:paddingTop="@dimen/padding_medium"
+			/>
+	</LinearLayout>
+
+	<!-- Divider -->
+	<View android:id="@+id/my_list_divider"	style="@style/MyDivider" />
+		
+	<WebView android:id="@+id/web_view"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+		android:layout_weight="1"
+		/>
+
+	<LinearLayout android:id="@+id/LinearLayout03"
+		android:layout_height="wrap_content" android:orientation="horizontal"
+		android:layout_width="fill_parent">
+		<Button android:layout_height="wrap_content" android:id="@+id/back_button"
+			android:text="@string/common_ok" android:layout_width="wrap_content"
+			android:layout_weight="1"></Button>
+	</LinearLayout>
+
+
+</LinearLayout>

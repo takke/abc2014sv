@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+
+	<android.support.v4.view.ViewPager
+	    xmlns:tools="http://schemas.android.com/tools"
+	    android:id="@+id/pager"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    tools:context=".MainActivity"
+		android:layout_alignParentTop="true"
+	    android:layout_above="@+id/my_list_divider"
+	    >
+	
+	
+	    <!--
+	    This title strip will display the currently visible page title, as well as the page
+	    titles for adjacent pages.
+	    -->
+	    <android.support.v4.view.PagerTabStrip
+	        android:id="@+id/pager_tab_strip"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="top"
+	        android:background="#33b5e5"
+	        android:textColor="#fff"
+	        android:paddingTop="4dp"
+	        android:paddingBottom="4dp" />
+	
+	</android.support.v4.view.ViewPager>
+	
+	<!-- メニュー表示位置定義用ダミーView -->
+	<View android:id="@+id/leftBottomInvisibleView" android:visibility="invisible"
+	    android:layout_width="0dip"
+	    android:layout_height="0dip"
+	    android:layout_alignParentLeft="true"
+	    android:layout_above="@+id/my_list_divider"
+	    />
+	
+	<!-- Divider -->
+	<View 
+		android:id="@+id/my_list_divider"
+		style="@style/MyDivider"
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentRight="true"
+	    android:layout_above="@+id/toolbar"
+	/>
+	
+	<!-- ツールバー -->
+	<LinearLayout android:id="@+id/toolbar"
+	    android:layout_width="0dip"
+	    android:layout_height="42dip"
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignParentBottom="true"
+	    >
+	    
+	    <ImageButton android:id="@+id/button1"
+			android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_weight="1"
+			android:paddingTop="5dip"
+			android:paddingBottom="5dip"
+		    android:layout_gravity="center_vertical"
+	        android:src="@drawable/dummy_image"
+			android:background="@drawable/transparent_button"
+	        />
+	    
+	    <ImageButton android:id="@+id/button2"
+			android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_weight="1"
+			android:paddingTop="5dip"
+			android:paddingBottom="5dip"
+		    android:layout_gravity="center_vertical"
+	        android:src="@drawable/dummy_image"
+			android:background="@drawable/transparent_button"
+	        />
+	    
+	    <ImageButton android:id="@+id/button3"
+			android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_weight="1"
+			android:paddingTop="5dip"
+			android:paddingBottom="5dip"
+		    android:layout_gravity="center_vertical"
+	        android:src="@drawable/dummy_image"
+			android:background="@drawable/transparent_button"
+	        />
+	    
+	    <ImageButton android:id="@+id/button5"
+			android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_weight="1"
+			android:paddingTop="5dip"
+			android:paddingBottom="5dip"
+		    android:layout_gravity="center_vertical"
+	        android:src="@drawable/dummy_image"
+			android:background="@drawable/transparent_button"
+	        />
+	    
+	    <ImageButton android:id="@+id/menu_button"
+	        android:contentDescription="@string/menu_menu"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_weight="1"
+		    android:layout_gravity="center_vertical"
+	        android:src="@drawable/ic_menu_moreoverflow_normal_holo_light"
+			android:background="@drawable/transparent_button"
+	        />
+	    	    	    
+	</LinearLayout>
+
+</RelativeLayout>

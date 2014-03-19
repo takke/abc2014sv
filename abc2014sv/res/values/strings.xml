@@ -1,0 +1,50 @@
+<resources>
+    
+    <string name="app_name">abc2014sv</string>
+    <string name="main_message" formatted="false">ABC2014 Spring Viewer Ver.%VER% [r%REV%]</string>
+    
+    <string name="title_activity_main">ABC2014 Spring Viewer</string>
+    <string name="title_activity_config">設定</string>
+    <string name="title_activity_page_config">タブのカスタマイズ</string>
+    <string name="title_activity_about">このアプリについて</string>
+    
+    <string name="pane_name_timeline">ホーム</string>
+    
+    
+    <string name="common_yes">はい</string>
+    <string name="common_no">いいえ</string>
+    <string name="common_ok">OK</string>
+    <string name="common_cancel">キャンセル</string>
+    
+    <string name="another_menu">その他</string>
+    
+    <string name="menu_menu">メニュー</string>
+    <string name="menu_page_config">タブのカスタマイズ</string>
+    <string name="menu_tab">タブ</string>
+    <string name="add_tab">タブの追加</string>
+    <string name="menu_about">このアプリについて</string>
+    
+    <string name="menu_home">ホーム</string>
+    <string name="menu_refresh">更新</string>
+    <string name="menu_config">設定</string>
+    <string name="menu_debug">デバッグ</string>
+    <string name="menu_show_tab_list">タブ一覧</string>
+    
+    <string name="menu_ok">OK</string>
+    <string name="menu_cancel">キャンセル</string>
+    <string name="menu_restore_default">デフォルトに戻す</string>
+    <string name="restore_default_confirm_message">初期配置に戻します。これまでに追加・変更したタブは消去されます。よろしいですか？</string>
+    <string name="menu_add">追加</string>
+    
+    <string name="menu_delete_tab">タブの削除</string>
+
+    <string name="change_color">カラー変更</string>
+    <string name="default_color">既定色</string>
+    
+    
+	<string name="config_display_settings_category">表示設定</string>
+    <string name="config_font_size">フォントサイズ</string>
+	<string name="config_toolbar_height">ツールバーの高さ</string>
+    
+		
+</resources>

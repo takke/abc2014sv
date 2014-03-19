@@ -1,0 +1,71 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.commonsware.cwac.tlv.TouchListView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tlv="http://schemas.android.com/apk/res/jp.takke.abc2014sv"
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:drawSelectorOnTop="false"
+        tlv:expanded_height="128dip"
+        tlv:grabber="@+id/icon"
+        tlv:normal_height="64dip"
+        tlv:remove_mode="none"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+	    android:layout_above="@+id/my_list_divider"
+        />
+
+	<!-- Divider -->
+	<View android:id="@+id/my_list_divider" style="@style/MyDivider"
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentRight="true"
+	    android:layout_above="@+id/toolbar"
+	/>
+	
+    
+	<!-- ツールバー -->
+	<LinearLayout android:id="@+id/toolbar"
+	    android:layout_width="0dip"
+	    android:layout_height="42dip"
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignParentBottom="true"
+	    >
+	    
+	    <Button android:id="@+id/ok_button"
+			android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_weight="1"
+			android:paddingTop="5dip"
+			android:paddingBottom="5dip"
+	        android:text="@string/common_ok"
+			android:background="@drawable/transparent_button"
+	        />
+	    
+	    <Button android:id="@+id/cancel_button"
+			android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_weight="1"
+			android:paddingTop="5dip"
+			android:paddingBottom="5dip"
+	        android:text="@string/common_cancel"
+			android:background="@drawable/transparent_button"
+	        />
+	    
+	    <ImageButton android:id="@+id/menu_button"
+	        android:contentDescription="@string/menu_menu"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_weight="1"
+		    android:layout_gravity="center_vertical"
+	        android:src="@drawable/ic_menu_moreoverflow_normal_holo_light"
+			android:background="@drawable/transparent_button"
+	        />
+	    	    	    
+	</LinearLayout>
+</RelativeLayout>

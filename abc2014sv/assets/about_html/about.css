@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+*         { color: #000000; }
+body      { background-color: #FFFFFF;
+            font-size: 100%;
+          }
+img       { margin: 0.2em}
+img.emoji { margin: 0}
+
+dd        { margin: 0 0 0 0.5em}
+dl        { margin: 0 0 0 0}
+dt        { margin: 0.2em 0 0.2em 0}
+dd dd     { margin: 0 0 0.5em 0}
+div a     { color: #208020 }
+li        { list-style-type:none; }
+ul        { margin: 0; padding: 0; }
+em {
+  color: #208020;
+  text-decoration: normal;
+  font-style: normal;
+}
+
+div.contents01 { text-align: center; }
+
+div.mz3 {
+  margin: 0;
+  text-align: right;
+}
+
+div.version-info {
+  border: 1px solid #FFC356;
+  padding: .2em;
+  margin: 1em 0 0 0;
+}
+
+div.version-info pre {
+  margin: 0px;
+  white-space: pre-wrap;
+}

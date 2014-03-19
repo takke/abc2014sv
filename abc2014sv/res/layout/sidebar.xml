@@ -1,0 +1,29 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/behindMenuScroll" >
+
+    <LinearLayout android:id="@+id/linearLayout"
+        style="@style/behindMenuScrollContent"
+        android:paddingTop="25dp" >
+
+        <!-- ================================================== -->
+        <!-- Tabs -->
+        <!-- ================================================== -->
+        <TextView style="@style/behindMenuTitle" android:text="@string/menu_tab" android:visibility="gone"/>
+		<View android:id="@+id/listDivider1" style="@style/behindMenuTitleUnderline1" android:visibility="gone"/>
+		<View android:id="@+id/listDivider2" style="@style/behindMenuTitleUnderline2" android:visibility="gone"/>
+        
+		
+		<!-- タブのカスタマイズ -->
+	    <Button android:id="@+id/page_config_button"
+			android:layout_width="fill_parent"
+		    android:layout_height="42dip"
+			android:paddingTop="@dimen/padding_medium"
+			android:paddingBottom="@dimen/padding_medium"
+			android:paddingLeft="@dimen/padding_medium"
+			android:paddingRight="@dimen/padding_medium"
+			android:layout_marginTop="@dimen/padding_medium"
+	        android:text="@string/menu_page_config"
+	        />
+		
+    </LinearLayout>
+</ScrollView>

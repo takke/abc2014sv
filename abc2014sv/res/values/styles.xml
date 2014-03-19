@@ -1,0 +1,148 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+
+	
+    
+    
+    <!-- 通常画面用 -->
+    <style name="AppTheme" parent="@style/MyAppTheme.Black" />
+
+    <style name="MyAppTheme.Light" parent="android:Theme.Light">
+    </style>
+    
+    <style name="MyAppTheme.Black" parent="android:Theme">
+    </style>
+    
+    
+    
+    <style name="MySelectDialogItem">
+        <item name="android:textColor">#000000</item>
+    </style>
+    
+    <style name="behindMenuScroll">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:background">#333333</item>
+    </style>
+    <style name="behindMenuScrollContent">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">8dp</item>
+    </style>
+    
+    <!-- サイドメニュー項目 -->
+    <style name="behindMenuItemLabel">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">4dp</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="android:layout_marginBottom">1dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:background">@color/sidebar_text</item>
+        <item name="android:drawablePadding">8dp</item>
+    </style>
+    
+    <!-- サイドメニュータイトル -->
+    <style name="behindMenuTitle">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">4dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">1dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:drawablePadding">8dp</item>
+    </style>
+    
+    <!-- サイドメニュータイトル下の線(1) -->
+    <style name="behindMenuTitleUnderline1">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:layout_marginRight">2dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:background">#FF000000</item>
+    </style>
+    
+    <!-- サイドメニュータイトル下の線(2) -->
+    <style name="behindMenuTitleUnderline2">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:layout_marginRight">2dp</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">6dp</item>
+        <item name="android:background">#E0FFFFFF</item>
+    </style>
+    
+    
+    <style name="DesignConfigStyle">
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="DesignConfigStyleText" parent="DesignConfigStyle">
+        <item name="android:layout_marginLeft">2dip</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+    <style name="DesignConfigStyleSpinner" parent="DesignConfigStyle">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">40dip</item>
+        <item name="android:layout_marginLeft">2dip</item>
+        <item name="android:layout_span">2</item>
+    </style>
+    <style name="DesignConfigStyleButton" parent="DesignConfigStyle">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">36dip</item>
+        <item name="android:layout_marginLeft">2dip</item>
+        <item name="android:layout_span">2</item>
+    </style>
+    
+    <!-- divider -->
+    <style name="MyDivider">
+	 	<item name="android:layout_width">fill_parent</item>
+	 	<item name="android:layout_height">1dp</item>
+	 	<item name="android:layout_marginLeft">0dp</item>
+	 	<item name="android:layout_marginRight">0dp</item>
+	 	<item name="android:background">#B0B0B0</item>
+    </style>
+    
+    
+    
+    
+    
+    
+
+    <style name="Now"></style>
+
+    <style name="Now.card_expand_inner_layout">
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="Now.card_expand_inner_layout.light_gray">
+        <item name="android:background">#515254</item>
+        <item name="android:textColor">#B3B2B2</item>
+    </style>
+
+    <style name="Now.card_expand_inner_layout.light_gray.bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Now.card_expand_inner_layout.dark">
+        <item name="android:background">#4A4B4D</item>
+        <item name="android:textColor">#FFF</item>
+    </style>
+
+    <style name="Now.card_expand_inner_layout.dark.bold" parent="@style/Now.card_expand_inner_layout.dark">
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+</resources>
