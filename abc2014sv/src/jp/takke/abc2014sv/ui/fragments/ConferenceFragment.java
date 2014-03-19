@@ -116,9 +116,9 @@ public class ConferenceFragment extends MyFragment implements MyToolbarListener 
             //--------------------------------------------------
             // お気に入り登録したデータの表示
             //--------------------------------------------------
+            final ArrayList<Lecture> lectures = new ArrayList<App.Lecture>();
             if (App.sConferenceData != null) {
                 
-                final ArrayList<Lecture> lectures = new ArrayList<App.Lecture>();
                 for (int i=0; i<App.sConferenceData.lectures.size(); i++){
                     
                     final Lecture lecture = App.sConferenceData.lectures.get(i);
@@ -163,7 +163,9 @@ public class ConferenceFragment extends MyFragment implements MyToolbarListener 
                         cards.add(card);
                     }
                 }
-            } else {
+            }
+            
+            if (lectures.size() == 0) {
                 final Lecture pi = new Lecture();
                 pi.title = "";
 
