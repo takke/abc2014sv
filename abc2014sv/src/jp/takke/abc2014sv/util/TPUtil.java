@@ -210,7 +210,12 @@ public class TPUtil {
 
 
     public static String formatShortTime(String time_text) {
-        return time_text.replaceAll("^[0-9]+-[0-9]+-[0-9]+ ", "").replaceAll(":00$", "");
+        return time_text.replaceAll("^[0-9]+-[0-9]+-[0-9]+ ", "").replaceAll(":[0-9][0-9]$", "");
+    }
+
+
+    public static String formatShortDateTime(String time_text) {
+        return time_text.replaceAll("^[0-9]+-0?", "").replace('-', '/').replaceAll(":[0-9][0-9]$", "");
     }
 
 

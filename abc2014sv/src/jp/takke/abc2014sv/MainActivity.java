@@ -1146,7 +1146,7 @@ public class MainActivity extends FragmentActivity {
         
         // キャッシュ情報
         if (App.sConferenceData != null) {
-            TPUtil.addQuickActionItem(qa, getApplicationContext(), TPUtil.formatShortTime(App.sConferenceData.updateDate),
+            TPUtil.addQuickActionItem(qa, getApplicationContext(), "更新:" + TPUtil.formatShortDateTime(App.sConferenceData.updateDate),
                     TPUtil.createIconicFontDrawable(MainActivity.this, EntypoIcon.MEGAPHONE, C.DEFAULT_ICON_SIZE_DIP, TPConfig.funcColorConfig),
                     new View.OnClickListener() {
                         
