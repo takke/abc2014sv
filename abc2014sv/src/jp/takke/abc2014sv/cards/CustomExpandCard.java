@@ -65,9 +65,9 @@ public class CustomExpandCard extends CardExpand {
 
         String ss = "";
         for (Speaker s : mLecture.speakers) {
-        	
-        	ss += s.name + "\n";
-        	ss += s.profile + "\n";
+            
+            ss += s.name + "\n";
+            ss += s.profile + "\n";
         }
         
         tx2.setText(ss);

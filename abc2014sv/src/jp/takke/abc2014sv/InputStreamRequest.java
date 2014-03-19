@@ -41,7 +41,7 @@ public class InputStreamRequest extends Request<InputStream> {
         this(Method.GET, url, listener, errorListener);
     }
 
-	@Override
+    @Override
     protected void deliverResponse(InputStream response) {
         mListener.onResponse(response);
     }

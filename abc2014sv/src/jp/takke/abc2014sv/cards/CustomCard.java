@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 public class CustomCard extends Card {
 
-	public boolean mExpandable = false;
-	
+    public boolean mExpandable = false;
+    
     public CustomCard(Context context) {
         super(context, R.layout.inner_content);
     }
@@ -25,10 +25,10 @@ public class CustomCard extends Card {
                 titleView.setText(mTitle);
 
                 if (mExpandable) {
-	                ViewToClickToExpand viewToClickToExpand =
-	                        ViewToClickToExpand.builder()
-	                                .setupView(view);
-	                setViewToClickToExpand(viewToClickToExpand);
+                    ViewToClickToExpand viewToClickToExpand =
+                            ViewToClickToExpand.builder()
+                                    .setupView(view);
+                    setViewToClickToExpand(viewToClickToExpand);
                 }
             }
         }
