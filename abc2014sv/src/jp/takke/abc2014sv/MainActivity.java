@@ -4,7 +4,9 @@ package jp.takke.abc2014sv;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map.Entry;
 
 import jp.takke.abc2014sv.App.LecInfo;
 import jp.takke.abc2014sv.App.Lecture;
@@ -23,6 +25,9 @@ import jp.takke.abc2014sv.util.MyLog;
 import jp.takke.abc2014sv.util.TPUtil;
 import net.simonvt.menudrawer.MenuDrawer;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 
 import yanzm.products.quickaction.lib.QuickAction;
@@ -241,24 +246,31 @@ public class MainActivity extends FragmentActivity {
         //--------------------------------------------------
         // データロード
         //--------------------------------------------------
-        {
-            final Intent intent = getIntent();
-            if (intent != null) {
-                mActivityType  = intent.getIntExtra("ACTIVITY_TYPE", C.ACTIVITY_TYPE_HOME);
-                
-                switch (mActivityType) {
-                case C.ACTIVITY_TYPE_HOME:
-                    break;
-                    
-//              case C.ACTIVITY_TYPE_USERLIST:
-//                  mTargetData = intent.getStringExtra("TARGET_DATA");     // ScreenName
-//                  mTargetListId = intent.getLongExtra("LIST_ID", -1);
-//                  mTargetListName = intent.getStringExtra("LIST_NAME");
-//                  break;
-                }
-            }
-        }
+//        {
+//            final Intent intent = getIntent();
+//            if (intent != null) {
+//                mActivityType  = intent.getIntExtra("ACTIVITY_TYPE", C.ACTIVITY_TYPE_HOME);
+//                
+//                switch (mActivityType) {
+//                case C.ACTIVITY_TYPE_HOME:
+//                    break;
+//                    
+////              case C.ACTIVITY_TYPE_USERLIST:
+////                  mTargetData = intent.getStringExtra("TARGET_DATA");     // ScreenName
+////                  mTargetListId = intent.getLongExtra("LIST_ID", -1);
+////                  mTargetListName = intent.getStringExtra("LIST_NAME");
+////                  break;
+//                }
+//            }
+//        }
         MyLog.dWithElapsedTime("setupDelayed1: ---------- data loaded [{elapsed}ms]", startTick);
+        
+        
+        //--------------------------------------------------
+        // お気に入りデータ取得
+        //--------------------------------------------------
+        loadStarMap();
+        MyLog.dWithElapsedTime("setupDelayed1: ---------- star loaded [{elapsed}ms]", startTick);
         
         
         //--------------------------------------------------
@@ -440,9 +452,36 @@ public class MainActivity extends FragmentActivity {
     }
 
 
+    private void loadStarMap() {
+        
+        final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        // json取得
+        String starMapJsonText = pref.getString(C.PREF_KEY_STAR_MAP, null);
+        
+        if (starMapJsonText != null) {
+            
+            App.sStarMap.clear();
+            try {
+                final JSONObject json = new JSONObject(starMapJsonText);
+                
+                final JSONArray names = json.names();
+                for (int i=0; i<names.length(); i++) {
+                    
+                    final String key = names.getString(i);
+                    final int value = json.getInt(key);
+                    App.sStarMap.put(key, value);
+                }
+            } catch (JSONException e) {
+                MyLog.e(e);
+            }
+        }
+    }
 
 
-    protected void resetAllTabs() {
+    /**
+     * 全タブの再描画
+     */
+    public void resetAllTabs() {
         
         for (int i=0; i<mPaneInfoList.size(); i++) {
             final Fragment fragment = mSectionsPagerAdapter.getFragment(i);
@@ -453,7 +492,6 @@ public class MainActivity extends FragmentActivity {
                 myFragment.resetTabData();
             }
         }
-        
     }
 
 
@@ -580,7 +618,11 @@ public class MainActivity extends FragmentActivity {
                             }
                         }
                         if (tag.equals("room")) {
-                            lecture.room_id = getAttribute(parser, "id", "");
+                            try {
+                                lecture.room_id = Integer.parseInt(getAttribute(parser, "id", ""));
+                            } catch (Exception e) {
+                                MyLog.e(e);
+                            }
                         }
 
                         // データ生成
@@ -2353,6 +2395,34 @@ public class MainActivity extends FragmentActivity {
 //      setTitle(sb.toString());
         
 //      MyLog.dWithElapsedTime("mySetTitle [{elapsed}ms]", startTick);
+    }
+
+
+    @SuppressLint("CommitPrefEdits")
+    public void saveStarMap() {
+        
+        final String jsonText = makeStarMapJsonText(App.sStarMap);
+        final SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        final SharedPreferences.Editor editor = pref.edit();
+        editor.putString(C.PREF_KEY_STAR_MAP, jsonText);
+        TPUtil.doSharedPreferencesEditorApplyOrCommit(editor);
+    }
+
+
+    private String makeStarMapJsonText(HashMap<String, Integer> sStarMap) {
+        
+        final JSONObject json = new JSONObject();
+        try {
+            
+            for (Entry<String, Integer> it : sStarMap.entrySet()) {
+                json.put(it.getKey(), it.getValue());
+            }
+            
+        } catch (JSONException e) {
+            MyLog.e(e);
+        }
+        
+        return json.toString();
     }
     
 }

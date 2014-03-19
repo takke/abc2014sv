@@ -7,6 +7,8 @@ import it.gmariotti.cardslib.library.internal.base.BaseCard;
 import it.gmariotti.cardslib.library.view.CardListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import jp.takke.abc2014sv.App;
 import jp.takke.abc2014sv.App.Lecture;
@@ -23,7 +25,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
-import android.widget.Toast;
 
 /**
  * カンファレンス用Fragment
@@ -66,7 +67,30 @@ public class ConferenceFragment extends MyFragment implements MyToolbarListener 
     @Override
     public void resetTabData() {
         
+        CardListView listView = null;
+        final View v = getView();
+        if (v != null) {
+            listView = (CardListView) v.findViewById(R.id.carddemo_list_expand);
+        }
+        
+        // スクロール位置保存
+        int position = 0;
+        int y = 0;
+        if (listView!=null){
+            position = listView.getFirstVisiblePosition();
+            final View child = listView.getChildAt(0);
+            if (child != null) {
+                y = child.getTop();
+            }
+        }
+        
+        // 再生成
         initCards();
+        
+        // スクロール位置復帰
+        if (listView!=null) {
+            listView.setSelectionFromTop(position, y);
+        }
         
     }
     
@@ -83,31 +107,80 @@ public class ConferenceFragment extends MyFragment implements MyToolbarListener 
             {
                 final Lecture pi = new Lecture();
                 pi.title = "";
-                pi.title += "※講演内容、講演時間は予告無く変更される場合があります。ご了承下さい。\n";
+                pi.title += "※講演内容、講演時間は予告無く変更される場合があります。ご了承下さい。";
                 
-                Card card = init_standard_header_with_expandcollapse_button_custom_area(pi);
-                cards.add(card);
-            }
-            {
-                final Lecture pi = new Lecture();
-                pi.title = "";
-                
-                pi.title += "このタブは開発中です。\n";
-                pi.title += "左側に「ライブ情報」タブがあります。開催前はダミーデータが表示されます。\n";
-                pi.title += "\n";
-                pi.title += "ここにお気に入り登録したカンファレンスが表示されるといいですねぇ。\n";
-                Card card = init_standard_header_with_expandcollapse_button_custom_area(pi);
+                final Card card = init_standard_header_with_expandcollapse_button_custom_area(pi);
                 cards.add(card);
             }
             
-            // TODO お気に入り表示
+            //--------------------------------------------------
+            // お気に入り登録したデータの表示
+            //--------------------------------------------------
+            if (App.sConferenceData != null) {
+                
+                final ArrayList<Lecture> lectures = new ArrayList<App.Lecture>();
+                for (int i=0; i<App.sConferenceData.lectures.size(); i++){
+                    
+                    final Lecture lecture = App.sConferenceData.lectures.get(i);
+                    
+                    if (App.sStarMap.containsKey(lecture.getStarKey())) {
+                        lectures.add(lecture);
+                    }
+                }
+                if (lectures.size() > 0) {
+                    
+                    // 枠順、部屋順、開催順にソート
+                    Collections.sort(lectures, new Comparator<Lecture>() {
+
+                        @Override
+                        public int compare(Lecture lhs, Lecture rhs) {
+                            
+                            // time_frame
+                            final int c0 = lhs.time_frame - rhs.time_frame;
+                            if (c0 != 0) {
+                                return c0;
+                            }
+                            
+                            // room_id
+                            final int c1 = lhs.room_id - rhs.room_id;
+                            if (c1 != 0) {
+                                return c1;
+                            }
+                            
+                            // start_time
+                            if (lhs.start_time != null && rhs.start_time != null) {
+                                final int c2 = lhs.start_time.compareTo(rhs.start_time);
+                                return c2;
+                            }
+                            
+                            return 0;
+                        }
+                    });
+                    
+                    
+                    for (Lecture lecture : lectures) {
+                        final Card card = init_standard_header_with_expandcollapse_button_custom_area(lecture);
+                        cards.add(card);
+                    }
+                }
+            } else {
+                final Lecture pi = new Lecture();
+                pi.title = "";
+
+                pi.title += "左側に「ライブ情報」タブがあります。開催前はダミーデータが表示されます。\n"
+                         + "このタブにはお気に入りに登録したカンファレンスが表示されます";
+                final Card card = init_standard_header_with_expandcollapse_button_custom_area(pi);
+                cards.add(card);
+            }
             
         } else {
         
             if (App.sConferenceData != null) {
                 
+                //--------------------------------------------------
                 // 会場情報設定
-                Lecture pi = new Lecture();
+                //--------------------------------------------------
+                final Lecture pi = new Lecture();
                 switch (mCategoryId) {
                 case 1: pi.title = "T0:基調講演/Reborn";            break;
                 case 2: pi.title = "T1:デザイン・開発";             break;
@@ -122,19 +195,20 @@ public class ConferenceFragment extends MyFragment implements MyToolbarListener 
                 // 場所
                 pi.speakers.add(new Speaker(getPlace()));
                 {
-                    Card card = init_standard_header_with_expandcollapse_button_custom_area(pi);
+                    final Card card = init_standard_header_with_expandcollapse_button_custom_area(pi);
                     cards.add(card);
                 }
                 
-                
-                // 該当カテゴリのものを追加する
+                //--------------------------------------------------
+                // 該当カテゴリのカンファレンスデータを追加する
+                //--------------------------------------------------
                 for (int i=0; i<App.sConferenceData.lectures.size(); i++){
                     
                     final Lecture lecture = App.sConferenceData.lectures.get(i);
                     
                     if (mCategoryId == lecture.category_id) {
                         
-                        Card card = init_standard_header_with_expandcollapse_button_custom_area(lecture);
+                        final Card card = init_standard_header_with_expandcollapse_button_custom_area(lecture);
                         cards.add(card);
                     }
                 }
@@ -193,6 +267,15 @@ public class ConferenceFragment extends MyFragment implements MyToolbarListener 
 //        }
 //        title += " ";
         
+        final Integer starLevel = App.sStarMap.get(lecture.getStarKey());
+        if (starLevel != null) {
+            switch (starLevel) {
+            case 1: title += "★ ";       break;
+            case 2: title += "★★ ";     break;
+            case 3: title += "★★★ ";   break;
+            }
+        }
+        
         header.setTitle(title + lecture.title);
 
         //Set visible the expand/collapse button
@@ -212,15 +295,36 @@ public class ConferenceFragment extends MyFragment implements MyToolbarListener 
 //                  Toast.makeText(getActivity(), "Click on " + item.getTitle() + "-" + ((Card) card).getCardHeader().getTitle(), Toast.LENGTH_SHORT).show();
                     
                     switch (item.getItemId()) {
-                    case 0: // お気に入りに追加
-                        Toast.makeText(getActivity(), "開発中です・・・", Toast.LENGTH_SHORT).show();
+                    case 0: // ★★★
+                    case 1: // ★★
+                    case 2: // ★
+                        switch (item.getItemId()) {
+                        case 0: // ★★★
+                            App.sStarMap.put(lecture.getStarKey(), 3);
+                            break;
+                        case 1: // ★★
+                            App.sStarMap.put(lecture.getStarKey(), 2);
+                            break;
+                        case 2: // ★
+                            App.sStarMap.put(lecture.getStarKey(), 1);
+                            break;
+                        }
+                        getMainActivity().resetAllTabs();
+                        getMainActivity().saveStarMap();
                         break;
                         
-                    case 1: // 共有
+                    case 3: // ☆
+                        // お気に入り削除
+                        App.sStarMap.remove(lecture.getStarKey());
+                        getMainActivity().resetAllTabs();
+                        getMainActivity().saveStarMap();
+                        break;
+                        
+                    case 10: // 共有
                         doShare(lecture);
                         break;
                         
-                    case 2: // ブラウザで開く
+                    case 20: // ブラウザで開く
                         // TODO なんかアンカーのルールがよくわかんないのでカテゴリページを開く
                         getMainActivity().openExternalBrowser(getUrl());
                         break;
@@ -234,9 +338,12 @@ public class ConferenceFragment extends MyFragment implements MyToolbarListener 
             header.setPopupMenuPrepareListener(new CardHeader.OnPrepareCardHeaderPopupMenuListener() {
                 @Override
                 public boolean onPreparePopupMenu(BaseCard card, PopupMenu popupMenu) {
-                    popupMenu.getMenu().add(0, 0, 0, "お気に入りに追加");
-                    popupMenu.getMenu().add(0, 1, 1, "共有");
-                    popupMenu.getMenu().add(0, 2, 2, "ブラウザで開く");
+                    popupMenu.getMenu().add(0,  0,  0, "★★★");
+                    popupMenu.getMenu().add(0,  1,  1, "★★");
+                    popupMenu.getMenu().add(0,  2,  2, "★");
+                    popupMenu.getMenu().add(0,  3,  3, "☆");
+                    popupMenu.getMenu().add(0, 10, 10, "共有");
+                    popupMenu.getMenu().add(0, 20, 20, "ブラウザで開く");
     
                     //return false; You can use return false to hidden the button and the popup
                     return true;

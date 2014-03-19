@@ -48,6 +48,9 @@ public class C {
     // ホームのタブ配置(後ろにユーザーIDを付加したキーとし、マルチアカウント対応とすること)
     public static final String PREF_KEY_HOME_PANEINFO_JSON_BASE = "HomePaneinfoJson_";
     
+    // StarMap
+    public static final String PREF_KEY_STAR_MAP = "StarMap";
+    
     // 戻るキーでタイムラインに戻る
     public static final String PREF_KEY_USE_BACK_TO_TIMELINE = "UseBackToTimeline";
     
@@ -147,4 +150,5 @@ public class C {
     
     // デフォルトのアイコンサイズ
     public static final int DEFAULT_ICON_SIZE_DIP = 32;
+
 }

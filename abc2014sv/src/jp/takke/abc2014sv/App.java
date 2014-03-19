@@ -1,6 +1,7 @@
 package jp.takke.abc2014sv;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import jp.takke.abc2014sv.util.TPUtil;
 import android.app.Application;
@@ -36,7 +37,7 @@ public class App extends Application {
         public String start_time = null;
         public String end_time = null;
         
-        public String room_id = "";
+        public int room_id = 0;
         public String room = "";
         public int category_id = 0;
         public String category = "";
@@ -75,6 +76,13 @@ public class App extends Application {
             }
             return start + " ～ " + end;
         }
+
+        public String getStarKey() {
+            
+            // lec_id だけではユニークにならないので start_time も付加する
+            
+            return lec_id + start_time;
+        }
     }
     
     public static class LecInfo {
@@ -105,4 +113,10 @@ public class App extends Application {
     
     // ライブ情報データ
     public static LiveInfo sLiveInfo = null;
+    
+    //--------------------------------------------------
+    // お気に入りカンファレンスデータ
+    //--------------------------------------------------
+    // (lec_id+start_time) => star-level [1,3]
+    public static HashMap<String, Integer> sStarMap = new HashMap<String, Integer>();
 }
