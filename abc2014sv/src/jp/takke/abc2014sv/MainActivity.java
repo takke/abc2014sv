@@ -16,7 +16,6 @@ import jp.takke.abc2014sv.ui.AboutActivity;
 import jp.takke.abc2014sv.ui.ConfigActivity;
 import jp.takke.abc2014sv.ui.PageConfigActivity;
 import jp.takke.abc2014sv.ui.fragments.ConferenceFragment;
-import jp.takke.abc2014sv.ui.fragments.HomeFragment;
 import jp.takke.abc2014sv.ui.fragments.LiveFragment;
 import jp.takke.abc2014sv.ui.fragments.MyFragment;
 import jp.takke.abc2014sv.util.IconAlertDialogUtil;
@@ -1996,7 +1995,7 @@ public class MainActivity extends FragmentActivity {
                 
             case HOME:
                 {
-                    final HomeFragment fragment = new HomeFragment();
+                    final ConferenceFragment fragment = new ConferenceFragment();
                     fragment.setPaneInfo(position, paneInfo);
                     return fragment;
                 }

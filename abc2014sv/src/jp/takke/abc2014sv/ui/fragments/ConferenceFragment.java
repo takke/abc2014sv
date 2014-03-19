@@ -75,55 +75,72 @@ public class ConferenceFragment extends MyFragment implements MyToolbarListener 
 
         MyLog.d("ConferenceFragment.initCards[" + mCategoryId + "]");
         
-        //Init an array of Cards
+        // Init an array of Cards
         ArrayList<Card> cards = new ArrayList<Card>();
         
-        if (App.sConferenceData != null) {
-            
-            // 会場情報設定
-            Lecture pi = new Lecture();
-            switch (mCategoryId) {
-            case 1: pi.title = "T0:基調講演/Reborn";            break;
-            case 2: pi.title = "T1:デザイン・開発";             break;
-            case 3: pi.title = "T2:メーカー・キャリア";         break;
-            case 4: pi.title = "T3:コンテンツ・ビジネス";       break;
-            case 5: pi.title = "T4:開発";                       break;
-            case 6: pi.title = "T5:デバイス";                   break;
-            case 7: pi.title = "T6:EffectiveAndroidコラボ開発"; break;
-            case 8: pi.title = "T7:LT";                         break;
-            case 9: pi.title = "T8:ビジネス・教育";             break;
-            }
-            // 場所
-            pi.speakers.add(new Speaker(getPlace()));
+        if (mCategoryId == 0) {
+            // ホーム
             {
-                Card card = init_standard_header_with_expandcollapse_button_custom_area(pi, 0);
+                final Lecture pi = new Lecture();
+                pi.title = "";
+                pi.title += "※講演内容、講演時間は予告無く変更される場合があります。ご了承下さい。\n";
+                
+                Card card = init_standard_header_with_expandcollapse_button_custom_area(pi);
+                cards.add(card);
+            }
+            {
+                final Lecture pi = new Lecture();
+                pi.title = "";
+                
+                pi.title += "このタブは開発中です。\n";
+                pi.title += "左側に「ライブ情報」タブがあります。開催前はダミーデータが表示されます。\n";
+                pi.title += "\n";
+                pi.title += "ここにお気に入り登録したカンファレンスが表示されるといいですねぇ。\n";
+                Card card = init_standard_header_with_expandcollapse_button_custom_area(pi);
                 cards.add(card);
             }
             
+            // TODO お気に入り表示
             
-            // 該当カテゴリのものを追加する
-            for (int i=0; i<App.sConferenceData.lectures.size(); i++){
+        } else {
+        
+            if (App.sConferenceData != null) {
                 
-                final Lecture lecture = App.sConferenceData.lectures.get(i);
-                
-                if (mCategoryId == lecture.category_id) {
-                    
-                    Card card = init_standard_header_with_expandcollapse_button_custom_area(lecture, i);
-//                    Card card = init_standard_header_with_expandcollapse_button_custom_area("Header "+i, i);
+                // 会場情報設定
+                Lecture pi = new Lecture();
+                switch (mCategoryId) {
+                case 1: pi.title = "T0:基調講演/Reborn";            break;
+                case 2: pi.title = "T1:デザイン・開発";             break;
+                case 3: pi.title = "T2:メーカー・キャリア";         break;
+                case 4: pi.title = "T3:コンテンツ・ビジネス";       break;
+                case 5: pi.title = "T4:開発";                       break;
+                case 6: pi.title = "T5:デバイス";                   break;
+                case 7: pi.title = "T6:EffectiveAndroidコラボ開発"; break;
+                case 8: pi.title = "T7:LT";                         break;
+                case 9: pi.title = "T8:ビジネス・教育";             break;
+                }
+                // 場所
+                pi.speakers.add(new Speaker(getPlace()));
+                {
+                    Card card = init_standard_header_with_expandcollapse_button_custom_area(pi);
                     cards.add(card);
+                }
+                
+                
+                // 該当カテゴリのものを追加する
+                for (int i=0; i<App.sConferenceData.lectures.size(); i++){
+                    
+                    final Lecture lecture = App.sConferenceData.lectures.get(i);
+                    
+                    if (mCategoryId == lecture.category_id) {
+                        
+                        Card card = init_standard_header_with_expandcollapse_button_custom_area(lecture);
+                        cards.add(card);
+                    }
                 }
             }
         }
         
-        //Init an array of Cards
-//        ArrayList<Card> cards = new ArrayList<Card>();
-//        for (int i=0;i<200;i++){
-//            Card card = init_standard_header_with_expandcollapse_button_custom_area("Header "+i, i);
-//            cards.add(card);
-//        }
-        
-        
-
         final CardArrayAdapter mCardArrayAdapter = new CardArrayAdapter(getActivity(), cards);
 
         final View v = getView();
@@ -156,7 +173,7 @@ public class ConferenceFragment extends MyFragment implements MyToolbarListener 
     /**
      * This method builds a standard header with a custom expand/collpase
      */
-    private Card init_standard_header_with_expandcollapse_button_custom_area(final Lecture lecture, int i) {
+    private Card init_standard_header_with_expandcollapse_button_custom_area(final Lecture lecture) {
 
         final CustomCard card = new CustomCard(getActivity());
 
@@ -204,7 +221,7 @@ public class ConferenceFragment extends MyFragment implements MyToolbarListener 
                         break;
                         
                     case 2: // ブラウザで開く
-                        // TODO なんかアンカーのルールがよくわかんないので適当に。
+                        // TODO なんかアンカーのルールがよくわかんないのでカテゴリページを開く
                         getMainActivity().openExternalBrowser(getUrl());
                         break;
                     }
@@ -282,27 +299,8 @@ public class ConferenceFragment extends MyFragment implements MyToolbarListener 
             card.addCardExpand(expand);
         }
         
-        //Just an example to expand a card
-//        if (i==2 || i==7 || i==9)
-//            card.setExpanded(true);
-
         //Swipe
 //        card.setSwipeable(true);
-
-        //Animator listener
-//        card.setOnExpandAnimatorEndListener(new Card.OnExpandAnimatorEndListener() {
-//            @Override
-//            public void onExpandEnd(Card card) {
-//                Toast.makeText(getActivity(),"Expand "+card.getCardHeader().getTitle(),Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        card.setOnCollapseAnimatorEndListener(new Card.OnCollapseAnimatorEndListener() {
-//            @Override
-//            public void onCollapseEnd(Card card) {
-//                Toast.makeText(getActivity(),"Collpase " +card.getCardHeader().getTitle(),Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
         return card;
     }

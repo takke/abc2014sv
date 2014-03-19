@@ -87,7 +87,7 @@ public class PaneInfo {
             return Integer.valueOf(s);
         }
         
-        return 0;
+        return 0;   // ホーム
     }
 
     /**
