@@ -196,7 +196,7 @@ public class ConferenceFragment extends MyFragment implements MyToolbarListener 
                 case 9: pi.title = "T8:ビジネス・教育";             break;
                 }
                 // 場所
-                pi.speakers.add(new Speaker(getPlace()));
+                pi.speakers.add(new Speaker(getPlace(mCategoryId)));
                 {
                     final Card card = init_standard_header_with_expandcollapse_button_custom_area(pi);
                     cards.add(card);
@@ -231,8 +231,8 @@ public class ConferenceFragment extends MyFragment implements MyToolbarListener 
     }
 
 
-    private String getPlace() {
-        switch (mCategoryId) {
+    private String getPlace(int categoryId) {
+        switch (categoryId) {
         case 1: return "秋葉原ダイビル2F";
         case 2: return "秋葉原ダイビル2F";
         case 3: return "秋葉原ダイビル5F 5A";
@@ -424,7 +424,7 @@ public class ConferenceFragment extends MyFragment implements MyToolbarListener 
         text += " ";
         text += "[" + lecture.lec_id + "]";
         text += lecture.title;
-        text += "(" + getPlace() + ")";
+        text += "(" + getPlace(lecture.category_id) + ")";
 //      text += " " + lecture.url;
         // URLデータが不正なのでルーム別のページにする
         text += " " + getUrl();
