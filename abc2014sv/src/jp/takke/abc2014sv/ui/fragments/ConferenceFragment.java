@@ -363,9 +363,14 @@ public class ConferenceFragment extends MyFragment implements MyToolbarListener 
         //--------------------------------------------------
         String body = lecture.getSpeakersText() + "\n";
         if (lecture.lec_id != null && lecture.lec_id.length() > 0) {
-            body += "[" + lecture.lec_id + "] " + lecture.getStartEndText() + "\n"
-                    + "\n\n";
+            body += "[" + lecture.lec_id + "] " + lecture.getStartEndText() + "\n";
             
+            if (mCategoryId == 0) {
+            	// お気に入りではルーム名、場所も表示する
+            	body += lecture.room + " / " + getPlace(lecture.category_id) + "\n";
+            } else {
+            	body += "\n\n";
+            }
         } else {
             body += "\n\n\n";
         }
