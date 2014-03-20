@@ -19,6 +19,7 @@ import jp.takke.abc2014sv.cards.CustomCard;
 import jp.takke.abc2014sv.cards.CustomExpandCard;
 import jp.takke.abc2014sv.util.MyLog;
 import jp.takke.abc2014sv.util.TPUtil;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -165,7 +166,7 @@ public class ConferenceFragment extends MyFragment implements MyToolbarListener 
                 }
             }
             
-            if (lectures.size() == 0) {
+            if (lectures.size() == 0 && App.sStarMap.size() == 0) {
                 final Lecture pi = new Lecture();
                 pi.title = "";
 
@@ -338,7 +339,8 @@ public class ConferenceFragment extends MyFragment implements MyToolbarListener 
             // Add a PopupMenuPrepareListener to add dynamically a menu entry
             // it is optional.
             header.setPopupMenuPrepareListener(new CardHeader.OnPrepareCardHeaderPopupMenuListener() {
-                @Override
+                @SuppressLint("NewApi")
+				@Override
                 public boolean onPreparePopupMenu(BaseCard card, PopupMenu popupMenu) {
                     popupMenu.getMenu().add(0,  0,  0, "★★★");
                     popupMenu.getMenu().add(0,  1,  1, "★★");
