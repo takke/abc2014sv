@@ -969,6 +969,11 @@ public class MainActivity extends FragmentActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     // error
+                	MyLog.e(error);
+                    mLoadingConfInfo = false;
+                    if (!mLoadingConfInfo && !mLoadingLiveInfo) {
+                        setProgressBarVisibility(false);
+                    }
                 }
             });
             mQueue.add(request);
@@ -998,6 +1003,11 @@ public class MainActivity extends FragmentActivity {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     // error
+                	MyLog.e(error);
+                    mLoadingLiveInfo = false;
+                    if (!mLoadingConfInfo && !mLoadingLiveInfo) {
+                        setProgressBarVisibility(false);
+                    }
                 }
             });
             mQueue.add(request);
